@@ -17,18 +17,18 @@ public class ReqRes extends TestBase {
     TestData testData = new TestData();
 
     String[] userId = {"1", "2", "3", "4", "5", "6"};
-    int randomIndex = ThreadLocalRandom.current().nextInt(userId.length); //получаем рандомный индекс
-    String randomUserId = userId[randomIndex]; //получаем значение по этому рандомному индексу
+    int randomIndex = ThreadLocalRandom.current().nextInt(userId.length);
+    String randomUserId = userId[randomIndex];
 
     @Test
     @Tag("Positive")
     @DisplayName("Получение списка пользователей")
     void successfulGetListUsersTest() {
-        given() //ДАНО
+        given()
                 .header("x-api-key", API_KEY)
-                .when() //КОГДА
+                .when() 
                 .get("/users")
-                .then() //ТОГДА - ЧТО ДЕЛАЕМ КОГДА ПРОВЕРЯЕМ
+                .then()
                 .log().status()
                 .log().body()
                 .statusCode(200)
@@ -42,11 +42,11 @@ public class ReqRes extends TestBase {
     @Tag("Positive")
     @DisplayName("Получение пользователя по id")
     void successfulGetUserIdTest() {
-        given() //ДАНО
+        given()
                 .header("x-api-key", API_KEY)
-                .when() //КОГДА
+                .when()
                 .get("/users/1")
-                .then() //ТОГДА - ЧТО ДЕЛАЕМ КОГДА ПРОВЕРЯЕМ
+                .then() 
                 .log().status()
                 .log().body()
                 .statusCode(200)
@@ -60,13 +60,13 @@ public class ReqRes extends TestBase {
     @Tag("Negative")
     @DisplayName("Невозможно создание нового пользователя")
     void NotSuccessfulCreateNewUserTest() {
-        given() //ДАНО
+        given()
                 .header("x-api-key", API_KEY)
                 .contentType(JSON)
                 .body(testData.generateDataUserJson())
-                .when() //КОГДА
+                .when() 
                 .post("/register")
-                .then() //ТОГДА - ЧТО ДЕЛАЕМ КОГДА ПРОВЕРЯЕМ
+                .then()
                 .log().status()
                 .log().body()
                 .statusCode(400)
@@ -82,13 +82,13 @@ public class ReqRes extends TestBase {
         emailAndFirstNameAndLastName.put("first_name", testData.firstName);
         emailAndFirstNameAndLastName.put("last_name", testData.lastName);
 
-        given() //ДАНО
+        given()
                 .header("x-api-key", API_KEY)
                 .contentType(JSON)
                 .body(emailAndFirstNameAndLastName)
-                .when() //КОГДА
+                .when()
                 .put("/users/" + randomUserId)
-                .then() //ТОГДА - ЧТО ДЕЛАЕМ КОГДА ПРОВЕРЯЕМ
+                .then()
                 .log().status()
                 .log().body()
                 .statusCode(200)
@@ -107,13 +107,13 @@ public class ReqRes extends TestBase {
         emailAndFirstNameAndLastName.put("first_name", testData.firstName);
         emailAndFirstNameAndLastName.put("last_name", testData.lastName);
 
-        given() //ДАНО
+        given()
                 .header("x-api-key", API_KEY)
                 .contentType(JSON)
                 .body(emailAndFirstNameAndLastName)
-                .when() //КОГДА
+                .when()
                 .patch("/users/" + randomUserId)
-                .then() //ТОГДА - ЧТО ДЕЛАЕМ КОГДА ПРОВЕРЯЕМ
+                .then()
                 .log().status()
                 .log().body()
                 .statusCode(200)
@@ -127,11 +127,11 @@ public class ReqRes extends TestBase {
     @Tag("Positive")
     @DisplayName("Удаление пользователя")
     void successfulDeleteUserTest() {
-        given() //ДАНО
+        given()
                 .header("x-api-key", API_KEY)
-                .when() //КОГДА
+                .when()
                 .delete("/users/" + randomUserId)
-                .then() //ТОГДА - ЧТО ДЕЛАЕМ КОГДА ПРОВЕРЯЕМ
+                .then()
                 .log().status()
                 .log().body()
                 .statusCode(204);
