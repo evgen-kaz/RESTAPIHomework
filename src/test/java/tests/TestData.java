@@ -14,11 +14,4 @@ public class TestData {
         String email = faker.internet().emailAddress();
         String firstName = faker.name().firstName();
         String lastName = faker.name().lastName();
-
-    /*protected String updateDataUserJson() {
-        String email = faker.internet().emailAddress();
-        String firstName = faker.name().firstName();
-        String lastName = faker.name().lastName();
-        return String.format("{\"email\": \"%s\", \"first_name\": \"%s\", \"last_name\": \"%s\"}", email, firstName, lastName);
-    }*/
 }
